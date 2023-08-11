@@ -9,7 +9,7 @@ import { Dispositivo } from 'app/interfaces/dispositivo';
 })
 export class HomePage {
 
-  listadoDispositivos!: Dispositivo[];
+  listadoDispositivos: Dispositivo[] = [];
 
   constructor(public dispositivoService: DispositivoService) {
     dispositivoService.getListadoDispositivos().then(lst => {

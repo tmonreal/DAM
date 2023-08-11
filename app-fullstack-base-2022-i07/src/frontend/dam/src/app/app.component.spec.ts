@@ -5,10 +5,17 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
 
+  let statusBar: { styleDefault: any; };
+
   beforeEach(async () => {
+
+
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        { provide: StatusBar, useValue: statusBar}
+      ]
     }).compileComponents();
   });
 

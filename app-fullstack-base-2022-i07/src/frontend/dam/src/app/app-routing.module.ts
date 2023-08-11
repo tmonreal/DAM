@@ -11,15 +11,15 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  
   {
     path: 'dispositivos',
     loadChildren: () => import('./dispositivos/dispositivos.module').then( m => m.DispositivosPageModule)
   },
   {
-    path: '',
-    redirectTo: 'dispositivos',
-    pathMatch: 'full'
-  }
+    path: 'dispositivos/:id',
+    loadChildren: () => import('./dispositivos/dispositivos.module').then( m => m.DispositivosPageModule)
+  },
   
 ];
 
