@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, fromEvent, interval, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, fromEvent, interval, map } from 'rxjs';
 import { DispositivoService } from '../services/dispositivo.service'
+import { Dispositivo } from 'app/model/Dispositivo';
+import { Medicion } from 'app/model/Medicion';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dispositivos',
@@ -9,11 +12,14 @@ import { DispositivoService } from '../services/dispositivo.service'
 })
 
 export class DispositivosPage implements OnInit, OnDestroy {
+  public dispositivo = new Dispositivo(0, " ", " ", 0);
+  public medicion = new Medicion(0, ' ', 0, 0);
+  public dispositivoId: number;
 
   observable$: Observable<any>
   subscription: Subscription
 
-  constructor(private _dispositivoService: DispositivoService) {
+  constructor(private router: ActivatedRoute, private _dispositivoService: DispositivoService) {
     this.observable$ = interval(1000)
 
     const move_values = this.observable$.pipe(map(val => val+10))
@@ -29,7 +35,19 @@ export class DispositivosPage implements OnInit, OnDestroy {
   //  console.log(`Coords: ${evt.clientX} X ${evt.clientY}`)
   //})
 
+  async function(){
+    //this.dispositivoId = this.router.snapshot.paramMap.get('id')
+    this.dispositivo = await this._dispositivoService.getListadoDispositivosById(this.dispositivoId)
+    console.log(this.dispositivo)
+  }
+
   async ngOnInit() {
+    
+    this.router.params.subscribe((params) => {
+      this.dispositivoId = +params['id'];
+      console.log(this.dispositivoId);
+    });
+
     this.subscription.unsubscribe()
 
     await this._dispositivoService.getListadoDispositivos()

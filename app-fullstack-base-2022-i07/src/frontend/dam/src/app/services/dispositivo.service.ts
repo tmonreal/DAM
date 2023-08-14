@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Dispositivo } from 'app/model/Dispositivo';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -11,5 +12,16 @@ export class DispositivoService {
 
   getListadoDispositivos (): Promise<any> {
     return firstValueFrom(this._http.get('http://localhost:8000/dispositivo'))
+  }
+
+  getListadoDispositivosById (id: number): Promise<any> {
+    return firstValueFrom(this._http.get('http://localhost:8000/dispositivo/'+id))
+    .then((dispositivo) => {
+      return dispositivo;
+    })
+    .catch((error) => {
+      console.log('Error in getListadoDispositivosById:', error);
+      return null;
+    });
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Medicion } from 'app/model/Medicion';
 import { MedicionService } from 'app/services/medicion.service';
 
 @Component({
@@ -10,6 +11,8 @@ export class MedicionesPage implements OnInit, OnDestroy {
 
   constructor(private _medicionService: MedicionService) {}
   
+  //medicion: Medicion[] = this._medicionService.getMedicion()
+
   async ngOnInit() {
     await this._medicionService.getMedicion()
     .then((mediciones) => {
