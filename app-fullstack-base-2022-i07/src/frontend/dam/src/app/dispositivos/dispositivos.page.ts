@@ -7,6 +7,7 @@ import { DispositivoService } from '../services/dispositivo.service'
   templateUrl: './dispositivos.page.html',
   styleUrls: ['./dispositivos.page.scss'],
 })
+
 export class DispositivosPage implements OnInit, OnDestroy {
 
   observable$: Observable<any>
@@ -22,27 +23,23 @@ export class DispositivosPage implements OnInit, OnDestroy {
     })
   }
 
-  mouseMove = fromEvent(document, 'mousemove')
+  //mouseMove = fromEvent(document, 'mousemove')
 
-  subscription_mouse = this.mouseMove.subscribe((evt: any) => {
-    console.log(`Coords: ${evt.clientX} X ${evt.clientY}`)
-  })
+  //subscription_mouse = this.mouseMove.subscribe((evt: any) => {
+  //  console.log(`Coords: ${evt.clientX} X ${evt.clientY}`)
+  //})
 
-  async ngOnInit() {
+  ngOnInit() {
     this.subscription.unsubscribe()
-    this.subscription_mouse.unsubscribe()
 
-    await this._dispositivoService.getListadoDispositivos()
+    this._dispositivoService.getListadoDispositivos()
       .then((dispositivos) => {
-        for (let dispositivo of dispositivos) {
-          console.log(dispositivo.nombre)
-        }
         console.log(dispositivos)
       })
       .catch((error) => {
-        console.log(error)
+        console.log('Error:', error)
       })
-    console.log('Me ejecuto primero')
+      console.log('Me ejecuto primero')
   }
 
   subscribe () {
@@ -57,6 +54,6 @@ export class DispositivosPage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
-    this.subscription_mouse.unsubscribe()
+    //this.subscription_mouse.unsubscribe()
   }
 }
