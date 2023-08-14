@@ -29,17 +29,22 @@ export class DispositivosPage implements OnInit, OnDestroy {
   //  console.log(`Coords: ${evt.clientX} X ${evt.clientY}`)
   //})
 
-  ngOnInit() {
+  async ngOnInit() {
     this.subscription.unsubscribe()
 
-    this._dispositivoService.getListadoDispositivos()
+    await this._dispositivoService.getListadoDispositivos()
       .then((dispositivos) => {
+        for (let dispositivo of dispositivos){
+          console.log(dispositivo.nombre)
+        }
         console.log(dispositivos)
       })
       .catch((error) => {
         console.log('Error:', error)
       })
-      console.log('Me ejecuto primero')
+    // Tarda mucho mas en resolverse la consulta a la API que hacer un console log
+    // Si uso async - await esperamos a que termine de ejecutar la promesa
+    console.log('Me ejecuto primero')
   }
 
   subscribe () {
