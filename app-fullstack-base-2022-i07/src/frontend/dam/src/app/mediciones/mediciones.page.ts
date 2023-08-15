@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Medicion } from 'app/model/Medicion';
 import { MedicionService } from 'app/services/medicion.service';
 
@@ -9,12 +10,18 @@ import { MedicionService } from 'app/services/medicion.service';
 })
 export class MedicionesPage implements OnInit, OnDestroy {
 
-  constructor(private _medicionService: MedicionService) {}
-  
-  //medicion: Medicion[] = this._medicionService.getMedicion()
+  public mediciones: Medicion[];
+  public dispositivoId: number;
 
+  constructor(private router: ActivatedRoute, private _medicionService: MedicionService) {}
+  
   async ngOnInit() {
-    await this._medicionService.getMedicion()
+    this.router.params.subscribe((params) => {
+      this.dispositivoId = +params['id'];
+      console.log(this.dispositivoId);
+    });
+
+    await this._medicionService.getMedicionById(this.dispositivoId)
     .then((mediciones) => {
           console.log(mediciones)
         })
@@ -22,14 +29,6 @@ export class MedicionesPage implements OnInit, OnDestroy {
           console.log('Error:', error)
         })
     
-    // for (let id=1; id<=6; id++){
-    //   this._medicionService.getLastMedicion(id).then((medicion) => {
-    //     console.log(medicion)
-    //   })
-    //   .catch((error) => {
-    //     console.log('Error:', error)
-    //   })
-    //   }
     
   }
 

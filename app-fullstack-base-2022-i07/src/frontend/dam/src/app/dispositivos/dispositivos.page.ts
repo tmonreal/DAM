@@ -35,11 +35,6 @@ export class DispositivosPage implements OnInit, OnDestroy {
   //  console.log(`Coords: ${evt.clientX} X ${evt.clientY}`)
   //})
 
-  async function(){
-    //this.dispositivoId = this.router.snapshot.paramMap.get('id')
-    this.dispositivo = await this._dispositivoService.getListadoDispositivosById(this.dispositivoId)
-    console.log(this.dispositivo)
-  }
 
   async ngOnInit() {
     

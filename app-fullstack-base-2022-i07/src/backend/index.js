@@ -35,8 +35,8 @@ app.use(express.static('/home/node/app/static/'));
 // to enable cors
 app.use(cors(corsOptions));
 
-app.use('/dispositivo', routerDispositivo)
-app.use('/medicion', routerMedicion)
+app.use('/dispositivo/:id', routerDispositivo)
+app.use('/medicion/:id', routerMedicion)
 
 //=======[ Main module code ]==================================================
 
