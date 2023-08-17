@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Dispositivo } from 'app/model/Dispositivo';
 import { DispositivoService } from 'app/services/dispositivo.service';
 
 @Component({
@@ -8,8 +9,12 @@ import { DispositivoService } from 'app/services/dispositivo.service';
 })
 export class HomePage {
 
-  constructor() {}
+  dispositivos: Dispositivo[];
 
-  
+  constructor(private DispositivoService: DispositivoService) {
+    DispositivoService.getListadoDispositivos()
+    .then(listdispo => { this.dispositivos = listdispo}
+      )
+  }
 
 }
