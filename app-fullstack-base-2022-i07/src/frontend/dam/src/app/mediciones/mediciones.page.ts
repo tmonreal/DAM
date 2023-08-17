@@ -28,7 +28,7 @@ export class MedicionesPage implements OnInit, OnDestroy {
         .catch((error) => {
           console.log('Error:', error)
         })
-    
+
     
   }
 
