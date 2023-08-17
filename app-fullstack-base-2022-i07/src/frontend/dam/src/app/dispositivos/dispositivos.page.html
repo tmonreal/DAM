@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-item slot="start" color="primary">
-      <ion-icon size="large" name="thermometer-outline"></ion-icon>
-      <ion-title>Sensor {{this.dispositivoId}}</ion-title>
+    <ion-item slot="start" color="primary" href="/home">
+      <ion-icon size="large" name="home-outline"></ion-icon>
+      <ion-title> SmartHome </ion-title>
     </ion-item>
 
 <ion-button fill="clear" color="light">
@@ -22,8 +22,16 @@
 
 <ion-card>
   <ion-card-header>
-    <ion-card-title>Dispositivo {{dispositivoId}}</ion-card-title>
-    <ion-card-subtitle>Ubicación: {{dispositivo.ubicacion}}</ion-card-subtitle>
+    <div style="display: flex; align-items: center;">
+      <ion-icon size="large" name="thermometer-outline" style="margin-right: 10px;"></ion-icon>
+      <ion-card-title>
+        Sensor {{dispositivoId}}
+      </ion-card-title>
+    </div>
   </ion-card-header>
-
+  <ion-card-content>
+    <ion-card-subtitle>
+      Ubicación: {{dispositivo.ubicacion}}
+    </ion-card-subtitle>
+  </ion-card-content>
 </ion-card>
