@@ -4,18 +4,19 @@
       <ion-icon size="large" name="home-outline"></ion-icon>
       <ion-title> SmartHome </ion-title>
     </ion-item>
+    
 
-<ion-button fill="clear" color="light">
+<ion-button fill="clear" color="light" fill="outline" routerLink="/mediciones/{{ this.dispositivoId }}">
   <ion-icon slot="start" name="stopwatch-outline"></ion-icon>
   <b>Ver todas las mediciones</b>
 </ion-button>
 
-<ion-button fill="clear" color="light">
+<ion-button fill="clear" color="light" fill="outline">
   <b>Ver Log Riegos</b>
   <ion-icon slot="start" name="water-outline"></ion-icon>
 </ion-button>
 
-<ion-button fill="clear" color="light">
+<ion-button fill="clear" color="light" fill="outline">
   <b>Abrir electroválvula</b>
   <ion-icon slot="start" name="play-outline"></ion-icon>
 </ion-button>
@@ -29,9 +30,4 @@
       </ion-card-title>
     </div>
   </ion-card-header>
-  <ion-card-content>
-    <ion-card-subtitle>
-      Ubicación: {{dispositivo.ubicacion}}
-    </ion-card-subtitle>
-  </ion-card-content>
 </ion-card>

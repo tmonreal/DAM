@@ -48,10 +48,6 @@ export class DispositivosPage implements OnInit, OnDestroy {
     .catch((error) => {
       console.log('Error: ', error)
     })
-
-    // esto me devuelve undefined
-    console.log(this.dispositivo.ubicacion)
-    console.log("Type of this.dispositivo:", typeof this.dispositivo);
   }
 
   subscribe () {

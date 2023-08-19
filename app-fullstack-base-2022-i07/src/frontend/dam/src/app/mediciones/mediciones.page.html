@@ -1,14 +1,33 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Mediciones del sensor N° {{this.dispositivoId}}</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-toolbar color="primary">
+    <ion-item slot="start" color="primary" href="/home">
+      <ion-icon size="large" name="home-outline"></ion-icon>
+      <ion-title> SmartHome </ion-title>
+    </ion-item>
+    
 
+<ion-button fill="clear" color="light" routerLink="/dispositivos/{{ this.dispositivoId }}" fill="outline">
+  <ion-icon slot="start" name="stopwatch-outline"></ion-icon>
+  <b>Ver última medicion</b>
+</ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mediciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<ion-button fill="clear" color="light" fill="outline">
+  <b>Ver Log Riegos</b>
+  <ion-icon slot="start" name="water-outline"></ion-icon>
+</ion-button>
+
+<ion-button fill="clear" color="light" fill="outline">
+  <b>Abrir electroválvula</b>
+  <ion-icon slot="start" name="play-outline"></ion-icon>
+</ion-button>
+
+<ion-card>
+  <ion-card-header>
+    <div style="display: flex; align-items: center;">
+      <ion-icon size="large" name="stopwatch-outline" style="margin-right: 10px;"></ion-icon>
+      <ion-card-title>
+        Mediciones Sensor {{dispositivoId}}
+      </ion-card-title>
+    </div>
+  </ion-card-header>
+</ion-card>
