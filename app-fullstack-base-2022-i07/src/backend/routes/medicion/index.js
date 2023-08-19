@@ -38,4 +38,15 @@ routerMedicion.get('/', function(req, res) {
     });
 })
 
+routerMedicion.get('/logRiegos/:id', function(req, res) {
+    
+    pool.query(`Select * from Log_Riegos where electrovalvulaId = ?`, [req.params.id], function(err, result, fields) {
+        if (err) {
+            res.send(err).status(400);
+            return;
+        }
+        res.send(result);
+    });
+})
+
 module.exports = routerMedicion
