@@ -104,7 +104,7 @@ generarChart(dispositivoId: number, valor_medicion: number) {
           plotShadow: false
       }
       , title: {
-          text: 'Sensor ' + dispositivoId
+          text: ' '
       }
 
       , credits: { enabled: false }

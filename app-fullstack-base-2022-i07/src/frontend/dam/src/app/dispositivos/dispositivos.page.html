@@ -21,10 +21,21 @@
   <ion-icon slot="start" name="play-outline"></ion-icon>
 </ion-button>
 
-
+<ion-card >
+  <ion-card-header>
+    <div style="display: flex; align-items: center;justify-content: center;">  
+      <ion-icon size="large" name="thermometer-outline" style="margin-right: 10px;"></ion-icon>
+      <ion-card-title>
+        Sensor {{dispositivoId}} 
+      </ion-card-title>
+    </div>
+  </ion-card-header>
+</ion-card>
 
 <ion-card>
-  <ion-card-header>
-    <div id="highcharts" style="width: 100%; height: 400px;"></div>
-  </ion-card-header>
+  <div style="display: flex; align-items: center;justify-content: center;">  
+    <ion-card-header>
+      <div id="highcharts" style="width: 100%; height: 400px;"></div>
+    </ion-card-header>
+  </div>
 </ion-card>
