@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { DispositivosPageRoutingModule } from './dispositivos-routing.module';
 import { DispositivosPage } from './dispositivos.page';
-import { ColoredBackDirective } from 'app/directives/colored-back.directive';
 
 @NgModule({
   imports: [
@@ -14,7 +13,6 @@ import { ColoredBackDirective } from 'app/directives/colored-back.directive';
     IonicModule,
     DispositivosPageRoutingModule
   ],
-  declarations: [DispositivosPage, ColoredBackDirective],
-  exports: [ColoredBackDirective]
+  declarations: [DispositivosPage]
 })
 export class DispositivosPageModule {}

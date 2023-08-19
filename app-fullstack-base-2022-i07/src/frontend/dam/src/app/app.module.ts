@@ -8,11 +8,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { StatusBar } from '@capacitor/status-bar';
-import { ColoredBackDirective } from './directives/colored-back.directive';
-
 @NgModule({
-  declarations: [AppComponent, ColoredBackDirective],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
