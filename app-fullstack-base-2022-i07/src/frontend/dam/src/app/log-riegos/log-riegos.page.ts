@@ -33,6 +33,7 @@ export class LogRiegosPage implements OnInit {
       console.log('Error: ', error)
     })
 
+
   }
 
 }
