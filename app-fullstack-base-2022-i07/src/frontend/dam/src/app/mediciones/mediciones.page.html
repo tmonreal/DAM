@@ -31,3 +31,30 @@
     </div>
   </ion-card-header>
 </ion-card>
+
+
+<ion-row>
+  <ion-col sizeXl="6" text-center>
+    <ion-card>
+      <ion-card-content>
+        <ion-row>
+          <ion-col col-4>
+            <ion-item> Fecha Medición </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item> Valor Medición </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let medicion of mediciones">
+          <ion-col col-4>
+            <ion-item> {{ medicion.fecha | fechaFormat }} </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item> {{ medicion.valor }} </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>

@@ -40,7 +40,7 @@ export class DispositivosPage implements OnInit, OnDestroy {
     
     this.router.params.subscribe((params) => {
       this.dispositivoId = +params['id'];
-      console.log(this.dispositivoId);
+      //console.log(this.dispositivoId);
     });
 
     await this._dispositivoService.getDispositivosById(this.dispositivoId)

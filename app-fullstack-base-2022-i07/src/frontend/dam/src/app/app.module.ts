@@ -9,9 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { StatusBar } from '@capacitor/status-bar';
+import { FechaFormatPipe } from './pipes/fecha-format.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FechaFormatPipe],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

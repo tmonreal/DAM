@@ -18,18 +18,14 @@ export class MedicionesPage implements OnInit, OnDestroy {
   async ngOnInit() {
     this.router.params.subscribe((params) => {
       this.dispositivoId = +params['id'];
-      console.log(this.dispositivoId);
+      //console.log(this.dispositivoId);
     });
 
-    await this._medicionService.getMedicionById(this.dispositivoId)
-    .then((mediciones) => {
-          console.log(mediciones)
-        })
-        .catch((error) => {
-          console.log('Error:', error)
-        })
-
-    
+    await this._medicionService.getMedicionesById(this.dispositivoId)
+    .then(med => {this.mediciones = med})
+    .catch((error) => {
+      console.log('Error:', error)
+    })
   }
 
   ngOnDestroy(): void {}
