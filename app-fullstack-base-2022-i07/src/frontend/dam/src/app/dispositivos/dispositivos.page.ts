@@ -51,9 +51,6 @@ private chartOptions: any;
     this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;    // arranca con la electrovalvula cerrada
     this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;   // asigno ABRIR al boton de accionamiento de electrovalvula
     
-    this.generarChart(this.dispositivoId, this.medicion.valor);
-    this.actualizarGrafica(this.medicion.valor);
-
     await this._dispositivoService.getDispositivosById(this.dispositivoId)
     .then(dispo => {
         this.dispositivo = dispo; 
@@ -68,8 +65,12 @@ private chartOptions: any;
         if (Array.isArray(med) && med.length > 0) {
         // Get the first Medicion object from the array
         this.medicion = med[0];
+        this.generarChart(this.medicion.valor);
+        
         console.log('Medicion:', this.medicion);
         console.log(this.medicion.valor);
+        
+        
       } else {
         console.log('No Medicion data found.');
       }
@@ -78,11 +79,16 @@ private chartOptions: any;
       console.log('Error:', error)
     })
     console.log('Assigned Medicion:', this.medicion);
+    this.actualizarGrafica(Number(this.medicion.valor));
+    
+    
   }
+
 
   ngOnDestroy(): void {}
 
  actualizarGrafica(valor_medicion: number) {
+  console.log('actualizar', valor_medicion)
     this.myChart.update({
         series: [{
             name: 'kPA',
@@ -94,7 +100,8 @@ private chartOptions: any;
     });
   }
 
-generarChart(dispositivoId: number, valor_medicion: number) {
+generarChart(valor_medicion: number) {
+  console.log('generar chart:', valor_medicion)
   this.chartOptions = {
       chart: {
           type: 'gauge',
@@ -163,6 +170,44 @@ generarChart(dispositivoId: number, valor_medicion: number) {
 
   };
   this.myChart = Highcharts.chart('highcharts', this.chartOptions);
+}
+
+clickElectrovalvula() {
+  let current_datetime = moment().format("YYYY-MM-DD HH:mm:ss");
+  let intervalObj: NodeJS.Timeout | null = null; 
+
+  if (this.accion_electrovalvula === this.ABRIR_ELECTROVALVULA) {
+
+      this.logRiegos.fecha = current_datetime;
+      this.logRiegos.apertura = this.ELECTROVALVULA_ABIERTA;
+      this._medicionService.addLogRiego(this.logRiegos);
+
+      this.accion_electrovalvula = this.CERRAR_ELECTROVALVULA;
+      this.medicion.valor = Math.floor(Math.random() * 100);
+      this.actualizarGrafica(this.medicion.valor);
+
+      intervalObj = setInterval(() => {
+
+          if (this.medicion.valor == 0 || this.logRiegos.apertura == this.ELECTROVALVULA_CERRADA) {
+            if (intervalObj) {
+              clearInterval(intervalObj); 
+              intervalObj = null;
+            }
+          } else {
+              this.medicion.valor--;
+              this.actualizarGrafica(this.medicion.valor);
+          }
+      }, 1000);
+  } else {                                    // tomo ultimo valor y lo inserto en la tabla mediciones
+      this.logRiegos.fecha = current_datetime;
+      this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;
+      this.medicion.fecha = current_datetime;
+
+      this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;
+      this._medicionService.addLogRiego(this.logRiegos);
+      //this._medicionService.agregarMedicion(this.medicion);
+      
+  }
 }
 
 }
