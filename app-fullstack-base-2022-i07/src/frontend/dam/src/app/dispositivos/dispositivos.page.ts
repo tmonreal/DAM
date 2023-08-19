@@ -25,10 +25,10 @@ public dispositivoId: number;
 public logRiegos = new LogRiegos(0, 0, '', 0);
 public id_dispositivo: string;
 public accion_electrovalvula: string;
-public ABRIR_ELECTROVALVULA: string = 'Abrir';
-public CERRAR_ELECTROVALVULA: string = 'Cerrar';
-public ELECTROVALVULA_ABIERTA: number = 1;
-public ELECTROVALVULA_CERRADA: number = 0;
+public OpenEV: string = 'Abrir';
+public CloseEV: string = 'Cerrar';
+public Estado_Open: number = 1;
+public Estado_Closed: number = 0;
 public myChart: any;
 private chartOptions: any;
   
@@ -47,8 +47,8 @@ private chartOptions: any;
 
  
     this.medicion.dispositivoId = this.dispositivo.dispositivoId;
-    this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;    // arranca con la electrovalvula cerrada
-    this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;   // asigno ABRIR al boton de accionamiento de electrovalvula
+    this.logRiegos.apertura = this.Estado_Closed; 
+    this.accion_electrovalvula = this.OpenEV;  
     
     await this._dispositivoService.getDispositivosById(this.dispositivoId)
     .then(dispo => {
@@ -183,19 +183,19 @@ clickElectrovalvula() {
   let current_datetime = moment().format("YYYY-MM-DD HH:mm:ss");
   let intervalObj: NodeJS.Timeout | null = null; 
 
-  if (this.accion_electrovalvula === this.ABRIR_ELECTROVALVULA) {
+  if (this.accion_electrovalvula === this.OpenEV) {
 
       this.logRiegos.fecha = current_datetime;
-      this.logRiegos.apertura = this.ELECTROVALVULA_ABIERTA;
-      this._medicionService.addLogRiego(this.logRiegos);
+      this.logRiegos.apertura = this.Estado_Open;
+      this._medicionService.addLogRiego(this.logRiegos); // Si abro la EV guardo el valor de cierre del riego
 
-      this.accion_electrovalvula = this.CERRAR_ELECTROVALVULA;
+      this.accion_electrovalvula = this.CloseEV;
       this.medicion.valor = Math.floor(Math.random() * 100);
       this.actualizarGrafica(this.medicion.valor);
 
       intervalObj = setInterval(() => {
 
-          if (this.medicion.valor == 0 || this.logRiegos.apertura == this.ELECTROVALVULA_CERRADA) {
+          if (this.medicion.valor == 0 || this.logRiegos.apertura == this.Estado_Closed) {
             if (intervalObj) {
               clearInterval(intervalObj); 
               intervalObj = null;
@@ -207,12 +207,12 @@ clickElectrovalvula() {
       }, 1000);
   } else {    
       this.logRiegos.fecha = current_datetime;
-      this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;
+      this.logRiegos.apertura = this.Estado_Closed;
       this.medicion.fecha = current_datetime;
 
-      this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;
+      this.accion_electrovalvula = this.OpenEV;
       console.log('Add Log riego'+ this.logRiegos)
-      this._medicionService.addLogRiego(this.logRiegos);
+      this._medicionService.addLogRiego(this.logRiegos); // Si cierro la EV guardo el valor de cierre del riego
       this._medicionService.addMedicion(this.medicion); // Si cierro la EV guardo valor en Mediciones!
       
   }
