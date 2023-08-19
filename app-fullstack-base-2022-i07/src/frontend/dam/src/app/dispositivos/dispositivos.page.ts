@@ -45,8 +45,7 @@ private chartOptions: any;
       //console.log(this.dispositivoId);
     });
 
-
-    
+ 
     this.medicion.dispositivoId = this.dispositivo.dispositivoId;
     this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;    // arranca con la electrovalvula cerrada
     this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;   // asigno ABRIR al boton de accionamiento de electrovalvula
@@ -67,7 +66,6 @@ private chartOptions: any;
         console.log('Error: ', error)
       })
       this.logRiegos.electrovalvulaId = this.dispositivo.electrovalvulaId;
-      console.log('EV ' + this.dispositivo.electrovalvulaId);
 
     await this._medicionService.getLastMedicionById(this.dispositivoId)
     .then((med) => {
@@ -87,7 +85,6 @@ private chartOptions: any;
     .catch((error) => {
       console.log('Error:', error)
     })
-    console.log('Assigned Medicion:', this.medicion);
     this.actualizarGrafica(Number(this.medicion.valor));
     
     
@@ -97,7 +94,6 @@ private chartOptions: any;
   ngOnDestroy(): void {}
 
  actualizarGrafica(valor_medicion: number) {
-  console.log('actualizar', valor_medicion)
     this.myChart.update({
         series: [{
             name: 'kPA',
@@ -110,7 +106,6 @@ private chartOptions: any;
   }
 
 generarChart(valor_medicion: number) {
-  console.log('generar chart:', valor_medicion)
   this.chartOptions = {
       chart: {
           type: 'gauge',
@@ -218,10 +213,9 @@ clickElectrovalvula() {
       this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;
       console.log('Add Log riego'+ this.logRiegos)
       this._medicionService.addLogRiego(this.logRiegos);
-      //this._medicionService.agregarMedicion(this.medicion);
+      this._medicionService.addMedicion(this.medicion);
       
   }
 }
 
 }
-

@@ -63,5 +63,20 @@ routerMedicion.post('/logRiegos/new', function(req, res) {
         });
 });
 
+routerMedicion.post('/new', function(req, res) {
+    const { medicionId, fecha, valor, dispositivoId } = req.body;
+
+    pool.query('INSERT INTO Mediciones (medicionId, fecha, valor, dispositivoId) VALUES (?, ?, ?, ?)', 
+        [medicionId, fecha, valor, dispositivoId], 
+        function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+                return;
+            }
+            res.status(200).send(result);
+        });
+});
+
+
 
 module.exports = routerMedicion

@@ -1,13 +1,61 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>log_riegos</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-toolbar color="primary">
+    <ion-item slot="start" color="primary" href="/home">
+      <ion-icon size="large" name="home-outline"></ion-icon>
+      <ion-title> SmartHome </ion-title>
+    </ion-item>
+    
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">log_riegos</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<ion-button shape="round" fill="clear" color="light" routerLink="/dispositivos/{{ this.electrovalvulaId }}" >
+  <ion-icon slot="start" name="stopwatch-outline"></ion-icon>
+  <b>Ver última medicion</b>
+</ion-button>
+
+<ion-button shape="round" fill="clear" color="light" routerLink="/mediciones/{{ this.electrovalvulaId }}">
+  <b>Ver todas las mediciones</b>
+  <ion-icon slot="start" name="stopwatch-outline"></ion-icon>
+</ion-button>
+
+
+<ion-card>
+  <ion-card-header>
+    <div style="display: flex; align-items: center;justify-content: center;"> 
+      <ion-icon size="large" name="stopwatch-outline" style="margin-right: 10px;"></ion-icon>
+      <ion-card-title>
+        Mediciones | Electroválvula {{dispositivoId}}
+      </ion-card-title>
+    </div>
+  </ion-card-header>
+</ion-card>
+
+
+<ion-row>
+  
+  <ion-col text-center>
+    <div style="display: flex; align-items: center;justify-content: center;"> 
+    <ion-card>
+      
+      <ion-card-content>
+        <ion-row>
+          <ion-col col-4>
+            <ion-item> Fecha Registro </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item> Estado Electroválvula </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let log of logRiegos">
+          <ion-col col-4>
+            <ion-item> {{ log.fecha | fechaFormat }} </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item> {{ log.apertura | aperturaStatus }} </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    
+    </ion-card>
+  </div>
+  </ion-col>
+</ion-row>
