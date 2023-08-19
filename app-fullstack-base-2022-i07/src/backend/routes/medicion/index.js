@@ -15,6 +15,18 @@ routerMedicion.get('/:id', function(req, res) {
     });
 })
 
+routerMedicion.get('/last/:id', function(req, res) {
+    
+    pool.query(`Select * from Mediciones where dispositivoId = ? order by fecha desc limit 1`, [req.params.id], function(err, result, fields) {
+        if (err) {
+            res.send(err).status(400);
+            return;
+        }
+        res.send(result);
+    });
+})
+
+
 routerMedicion.get('/', function(req, res) {
     
     pool.query(`Select * from Mediciones`, function(err, result, fields) {

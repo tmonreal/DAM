@@ -26,7 +26,18 @@
     <div style="display: flex; align-items: center;">
       <ion-icon size="large" name="thermometer-outline" style="margin-right: 10px;"></ion-icon>
       <ion-card-title>
-        Sensor {{dispositivoId}}
+        Sensor {{dispositivoId}} 
+      </ion-card-title>
+    </div>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <div style="display: flex; align-items: center;">
+      <ion-card-title>
+          Medicion Valor: {{ medicion.valor }} //
+          Medicion Fecha: {{ medicion.fecha }}
       </ion-card-title>
     </div>
   </ion-card-header>

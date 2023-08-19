@@ -1,9 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, fromEvent, interval, map } from 'rxjs';
 import { DispositivoService } from '../services/dispositivo.service'
+import { MedicionService } from '../services/medicion.service'
 import { Dispositivo } from 'app/model/Dispositivo';
 import { Medicion } from 'app/model/Medicion';
 import { ActivatedRoute } from '@angular/router';
+import * as Highcharts from 'highcharts';
+import * as moment from 'moment';
+
+declare var require: any;
+require('highcharts/highcharts-more')(Highcharts);
+require('highcharts/modules/solid-gauge')(Highcharts);
 
 @Component({
   selector: 'app-dispositivos',
@@ -12,29 +19,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class DispositivosPage implements OnInit, OnDestroy {
-  public dispositivo = new Dispositivo(0, "", "", 0);
-  public medicion = new Medicion(0, "", 0, 0);
-  public dispositivoId: number;
+public dispositivo = new Dispositivo(0, " ", " ", 0);
+public medicion = new Medicion(0, " ", 0, 0);
+public dispositivoId: number;
+  
 
-  //observable$: Observable<any>
-  //subscription: Subscription
-
-  constructor(private router: ActivatedRoute, private _dispositivoService: DispositivoService) {
-    //this.observable$ = interval(1000)
-
-    //const move_values = this.observable$.pipe(map(val => val+10))
-
-    //this.subscription = move_values.subscribe((value) => {
-    //  console.log(value)
-    //})
-  }
-
-  //mouseMove = fromEvent(document, 'mousemove')
-
-  //subscription_mouse = this.mouseMove.subscribe((evt: any) => {
-  //  console.log(`Coords: ${evt.clientX} X ${evt.clientY}`)
-  //})
-
+  constructor(
+    private router: ActivatedRoute, 
+    private _dispositivoService: DispositivoService,  
+    private _medicionService: MedicionService) { }
 
   async ngOnInit() {
     
@@ -44,24 +37,35 @@ export class DispositivosPage implements OnInit, OnDestroy {
     });
 
     await this._dispositivoService.getDispositivosById(this.dispositivoId)
-    .then(dispo => {this.dispositivo = dispo} )
+    .then(dispo => {
+        this.dispositivo = dispo; 
+        console.log(this.dispositivo);})
+      
     .catch((error) => {
       console.log('Error: ', error)
     })
+
+    await this._medicionService.getLastMedicionById(this.dispositivoId)
+    .then((med) => {
+        if (Array.isArray(med) && med.length > 0) {
+        // Get the first Medicion object from the array
+        this.medicion = med[0];
+        console.log('Medicion:', this.medicion);
+        console.log(this.medicion.valor);
+      } else {
+        console.log('No Medicion data found.');
+      }
+    })
+    .catch((error) => {
+      console.log('Error:', error)
+    })
+    console.log('Assigned Medicion:', this.medicion);
   }
 
-  subscribe () {
-    //this.subscription = this.observable$.subscribe((integer) => {
-    //  console.log(integer)
-  //  })
-  }
+  subscribe () { }
 
-  unsubscribe () {
-    //this.subscription.unsubscribe()
-  }
+  unsubscribe () {}
 
-  ngOnDestroy(): void {
-    //this.subscription.unsubscribe()
-    //this.subscription_mouse.unsubscribe()
-  }
+  ngOnDestroy(): void {}
 }
+

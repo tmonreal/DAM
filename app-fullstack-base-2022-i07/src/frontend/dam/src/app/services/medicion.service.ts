@@ -10,12 +10,20 @@ export class MedicionService {
 
   constructor(private _http: HttpClient) { }
   
-  getMedicion (): Promise<any>{
-    return firstValueFrom(this._http.get('http://localhost:8000/medicion/'))
+  getLastMedicionById (id: number): Promise<Medicion>{
+    console.log('getLastMedicionById')
+    return firstValueFrom(this._http.get('http://localhost:8000/medicion/last/' + id ))
+    .then((medicion) => {
+      return medicion as Medicion;
+    })
+    .catch((error) => {
+      console.log('Error in getMedicionById:', error);
+      return new Medicion(0, '', 0, 0);
+    });
   }
 
   getMedicionesById (id: number): Promise<Medicion[]>{
-    console.log('getMedicionesByIdDispositivo')
+    console.log('getMedicionesById')
     return firstValueFrom(this._http.get('http://localhost:8000/medicion/' + id))
     .then((mediciones) => {
       console.log(mediciones)
@@ -26,4 +34,5 @@ export class MedicionService {
       return [];
     });
   }
+
 }
