@@ -98,7 +98,7 @@ generarChart(dispositivoId: number, valor_medicion: number) {
   this.chartOptions = {
       chart: {
           type: 'gauge',
-          plotBackgroundColor: null,
+          plotBackgroundColor: '#3880ff',
           plotBackgroundImage: null,
           plotBorderWidth: 0,
           plotShadow: false
