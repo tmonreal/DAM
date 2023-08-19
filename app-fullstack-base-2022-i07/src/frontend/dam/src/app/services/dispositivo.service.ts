@@ -14,14 +14,13 @@ export class DispositivoService {
     return firstValueFrom(this._http.get('http://localhost:8000/dispositivo/'))
   }
 
-  getDispositivosById (id: number): Promise<any> {
-    return firstValueFrom(this._http.get('http://localhost:8000/dispositivo/' + id))
-    .then((dispositivo) => {
+  async getDispositivosById (id: number): Promise<any> {
+    try {
+      const dispositivo = await firstValueFrom(this._http.get('http://localhost:8000/dispositivo/' + id));
       return dispositivo;
-    })
-    .catch((error) => {
+    } catch (error) {
       console.log('Error in getDispositivosById:', error);
       return null;
-    });
+    }
   }
 }

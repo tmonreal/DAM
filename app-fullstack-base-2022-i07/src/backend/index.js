@@ -44,6 +44,7 @@ app.get('/', function(req, res, next) {
     res.send({'mensaje': 'Hola DAM'}).status(200);
 });
 
+
 app.get('/user/', function(req, res, next) {
     pool.query('Select * from Usuarios', function(err, result, fields) {
         if (err) {

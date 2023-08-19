@@ -46,19 +46,28 @@ private chartOptions: any;
     });
 
 
-    this.logRiegos.electrovalvulaId = this.dispositivo.electrovalvulaId;
+    
     this.medicion.dispositivoId = this.dispositivo.dispositivoId;
     this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;    // arranca con la electrovalvula cerrada
     this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;   // asigno ABRIR al boton de accionamiento de electrovalvula
     
     await this._dispositivoService.getDispositivosById(this.dispositivoId)
     .then(dispo => {
-        this.dispositivo = dispo; 
-        console.log(this.dispositivo);})
-      
-    .catch((error) => {
-      console.log('Error: ', error)
-    })
+      if (Array.isArray(dispo) && dispo.length > 0) {
+        this.dispositivo = dispo[0]; 
+        console.log('Dispositivo:', this.dispositivo);
+        console.log('EV ID:', this.dispositivo.electrovalvulaId)
+      }
+      else {
+        console.log('No Dispositivo data found.')
+      }
+        
+      })      
+      .catch((error) => {
+        console.log('Error: ', error)
+      })
+      this.logRiegos.electrovalvulaId = this.dispositivo.electrovalvulaId;
+      console.log('EV ' + this.dispositivo.electrovalvulaId);
 
     await this._medicionService.getLastMedicionById(this.dispositivoId)
     .then((med) => {
@@ -166,7 +175,10 @@ generarChart(valor_medicion: number) {
           tooltip: {
               valueSuffix: ' kPA'
           }
-      }]
+      }],
+      accessibility: {
+        enabled: false
+      }
 
   };
   this.myChart = Highcharts.chart('highcharts', this.chartOptions);
@@ -204,6 +216,7 @@ clickElectrovalvula() {
       this.medicion.fecha = current_datetime;
 
       this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;
+      console.log('Add Log riego'+ this.logRiegos)
       this._medicionService.addLogRiego(this.logRiegos);
       //this._medicionService.agregarMedicion(this.medicion);
       

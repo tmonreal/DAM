@@ -49,4 +49,19 @@ routerMedicion.get('/logRiegos/:id', function(req, res) {
     });
 })
 
+routerMedicion.post('/logRiegos/new', function(req, res) {
+    const { logRiegoId, apertura, fecha, electrovalvulaId } = req.body;
+
+    pool.query('INSERT INTO Log_Riegos (logRiegoId, apertura, fecha, electrovalvulaId) VALUES (?, ?, ?, ?)', 
+        [logRiegoId, apertura, fecha, electrovalvulaId], 
+        function(err, result) {
+            if (err) {
+                res.status(400).send(err);
+                return;
+            }
+            res.status(200).send(result);
+        });
+});
+
+
 module.exports = routerMedicion
