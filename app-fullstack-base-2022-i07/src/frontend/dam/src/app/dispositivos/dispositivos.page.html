@@ -6,20 +6,16 @@
     </ion-item>
     
 
-<ion-button fill="clear" color="light" fill="outline" routerLink="/mediciones/{{ this.dispositivoId }}">
+<ion-button shape="round" fill="clear" color="light" routerLink="/mediciones/{{ this.dispositivoId }}">
   <ion-icon slot="start" name="stopwatch-outline"></ion-icon>
   <b>Ver todas las mediciones</b>
 </ion-button>
 
-<ion-button fill="clear" color="light" fill="outline">
+<ion-button shape="round" fill="clear" color="light">
   <b>Ver Log Riegos</b>
   <ion-icon slot="start" name="water-outline"></ion-icon>
 </ion-button>
 
-<ion-button fill="clear" color="light" fill="outline">
-  <b>Abrir electroválvula</b>
-  <ion-icon slot="start" name="play-outline"></ion-icon>
-</ion-button>
 
 <ion-card>
   <ion-card-header>
@@ -39,3 +35,11 @@
     </ion-card-header>
   </div>
 </ion-card>
+
+<ion-card-content>
+  <ion-button color="success" shape="round" *ngIf="medicion.valor > 30 && accion_electrovalvula==ABRIR_ELECTROVALVULA" appColorFondo expand="block" (click)="clickElectrovalvula()">
+    <ion-icon slot="start" name="play-outline"></ion-icon> {{accion_electrovalvula}} Electroválvula </ion-button>
+  <ion-button color="danger" shape="round" *ngIf="medicion.valor <= 30 || accion_electrovalvula==CERRAR_ELECTROVALVULA"  expand="block"  (click)="clickElectrovalvula()">
+    <ion-icon slot="start" name="pause-outline"></ion-icon> {{accion_electrovalvula}} Electroválvula</ion-button>
+</ion-card-content>
+
