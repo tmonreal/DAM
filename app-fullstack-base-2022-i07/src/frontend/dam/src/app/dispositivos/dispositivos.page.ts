@@ -205,7 +205,7 @@ clickElectrovalvula() {
               this.actualizarGrafica(this.medicion.valor);
           }
       }, 1000);
-  } else {                                    // tomo ultimo valor y lo inserto en la tabla mediciones
+  } else {    
       this.logRiegos.fecha = current_datetime;
       this.logRiegos.apertura = this.ELECTROVALVULA_CERRADA;
       this.medicion.fecha = current_datetime;
@@ -213,7 +213,7 @@ clickElectrovalvula() {
       this.accion_electrovalvula = this.ABRIR_ELECTROVALVULA;
       console.log('Add Log riego'+ this.logRiegos)
       this._medicionService.addLogRiego(this.logRiegos);
-      this._medicionService.addMedicion(this.medicion);
+      this._medicionService.addMedicion(this.medicion); // Si cierro la EV guardo valor en Mediciones!
       
   }
 }
