@@ -38,5 +38,5 @@ La aplicación cuenta con:
 
 ### Demostración de app en funcionamiento:
 
-https://github.com/tmonreal/DAM/assets/84754265/5a9093fa-b5bd-4074-9914-ef8810c3180f
+https://github.com/tmonreal/Desarrollo_Aplicacion_Multiplataforma/assets/84754265/6bb7930e-5080-48c0-90ca-3adc905b4117
 
