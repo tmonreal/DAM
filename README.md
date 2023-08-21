@@ -15,7 +15,7 @@ suelo está saturado; de 10 a 30 Cb, el suelo está en CC; y, de 30 a 60 Cb, el 
 seco y debe regarse de inmediato.
 
 
-### Para ello , se creó una aplicación en Ionic que permite:
+### Para ello, se creó una aplicación en Ionic que permite:
 - Dar un listado de dispositivos.
 - Al entrar a algún dispositivo, brindar el último valor de medición por sensor en el gráfico.
 - Tener la opción dentro de la vista del dispositivo con sus medición, de poder abrir la electroválvula que le corresponde. (En el caso de que se abra o se cierre dicha electroválvula, se deberá insertar un registro en la tabla de Log_Riegos y por otro lado se necesitará realizar un insert sobre la tabla de mediciones para crear un nuevo registro con el nuevo valor solamente si se cierra la electroválvula)
