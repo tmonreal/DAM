@@ -7,16 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { LogRiegosPageRoutingModule } from './log-riegos-routing.module';
 
 import { LogRiegosPage } from './log-riegos.page';
-import { FechaFormatPipe } from 'app/pipes/fecha-format.pipe';
 import { AperturaStatusPipe } from 'app/pipes/apertura-status.pipe';
+import { SharedModuleModule } from 'app/shared-module.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LogRiegosPageRoutingModule
+    LogRiegosPageRoutingModule,
+    SharedModuleModule
   ],
-  declarations: [LogRiegosPage, FechaFormatPipe, AperturaStatusPipe]
+  declarations: [LogRiegosPage, AperturaStatusPipe]
 })
 export class LogRiegosPageModule {}

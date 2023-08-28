@@ -22,42 +22,39 @@
     <div style="display: flex; align-items: center;justify-content: center;"> 
       <ion-icon size="large" name="stopwatch-outline" style="margin-right: 10px;"></ion-icon>
       <ion-card-title>
-        Mediciones | Electroválvula {{dispositivoId}}
+        Mediciones | Electroválvula {{electrovalvulaId}}
       </ion-card-title>
     </div>
   </ion-card-header>
 </ion-card>
 
-<ion-toggle-bar>
-  <ion-toggle-bar-content>
-    <ion-row>
-      <ion-col text-center>
-        <div style="display: flex; align-items: center;justify-content: center;"> 
-        <ion-card>
-          
-          <ion-card-content>
-            <ion-row>
-              <ion-col col-4>
-                <ion-item> Fecha Registro </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item> Estado Electroválvula </ion-item>
-              </ion-col>
-            </ion-row>
 
-            <ion-row *ngFor="let log of logRiegos">
-              <ion-col col-5>
-                <ion-item> {{ log.fecha | fechaFormat }} </ion-item>
-              </ion-col>
-              <ion-col col-5>
-                <ion-item> {{ log.apertura | aperturaStatus }} </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-        
-        </ion-card>
-      </div>
-      </ion-col>
-    </ion-row>
-  </ion-toggle-bar-content>
-</ion-toggle-bar>
+<ion-row>
+  <ion-col text-center>
+    <div style="display: flex; align-items: center;justify-content: center;"> 
+    <ion-card>
+      
+      <ion-card-content>
+        <ion-row>
+          <ion-col col-4>
+            <ion-item> Fecha Registro </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item> Estado Electroválvula </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let log of logRiegos">
+          <ion-col col-5>
+            <ion-item> {{ log.fecha | fechaFormat }} </ion-item>
+          </ion-col>
+          <ion-col col-5>
+            <ion-item> {{ log.apertura | aperturaStatus }} </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    
+    </ion-card>
+  </div>
+  </ion-col>
+</ion-row>

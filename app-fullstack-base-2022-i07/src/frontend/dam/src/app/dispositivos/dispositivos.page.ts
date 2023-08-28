@@ -6,7 +6,6 @@ import { Medicion } from 'app/model/Medicion';
 import { LogRiegos } from 'app/model/LogRiegos';
 import { ActivatedRoute } from '@angular/router';
 import * as Highcharts from 'highcharts';
-import * as moment from 'moment';
 
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
@@ -180,12 +179,12 @@ generarChart(valor_medicion: number) {
 }
 
 clickElectrovalvula() {
-  let current_datetime = moment().format("YYYY-MM-DD HH:mm:ss");
+  let current_datetime = new Date();
   let intervalObj: NodeJS.Timeout | null = null; 
 
   if (this.accion_electrovalvula === this.OpenEV) {
 
-      this.logRiegos.fecha = current_datetime;
+      this.logRiegos.fecha = String(current_datetime);
       this.logRiegos.apertura = this.Estado_Open;
       this._medicionService.addLogRiego(this.logRiegos); // Si abro la EV guardo el valor de cierre del riego
 
@@ -206,9 +205,9 @@ clickElectrovalvula() {
           }
       }, 1000);
   } else {    
-      this.logRiegos.fecha = current_datetime;
+      this.logRiegos.fecha = String(current_datetime);
       this.logRiegos.apertura = this.Estado_Closed;
-      this.medicion.fecha = current_datetime;
+      this.medicion.fecha = String(current_datetime);
 
       this.accion_electrovalvula = this.OpenEV;
       console.log('Add Log riego'+ this.logRiegos)

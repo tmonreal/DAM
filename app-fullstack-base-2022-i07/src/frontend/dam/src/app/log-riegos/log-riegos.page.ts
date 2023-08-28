@@ -28,7 +28,7 @@ export class LogRiegosPage implements OnInit {
     await this._medicionService.getLogByElectrovalvulaId(this.electrovalvulaId)
     .then(log => {
       this.logRiegos = log;
-      console.log(this.logRiegos);
+      console.log('LogRiegos:', this.logRiegos);
     }).catch((error)=>{
       console.log('Error: ', error)
     })
